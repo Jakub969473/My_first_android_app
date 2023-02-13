@@ -146,11 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 x.setText("0");
                 text.setText(String.format("In "+time/1000+" s you clicked "+counter+" times"));
                 button.setEnabled(false);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                button.setVisibility(View.INVISIBLE);
                 restart.setVisibility(View.VISIBLE);
                 restart.setEnabled(true);
             }
