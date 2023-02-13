@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="Button">Click Me!!</string>
+    <string name="Click_Counter"></string>
+    <string name="time">0.0</string>
+    <string name="InputString">s</string>
+</resources>
