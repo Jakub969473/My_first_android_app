@@ -2,8 +2,11 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     int time;
 
     Button restart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +107,10 @@ public class MainActivity extends AppCompatActivity {
 
                 Timer();
 
+               
+
+
+
             }
         });
 
@@ -148,7 +156,15 @@ public class MainActivity extends AppCompatActivity {
                 button.setEnabled(false);
                 button.setVisibility(View.INVISIBLE);
                 restart.setVisibility(View.VISIBLE);
-                restart.setEnabled(true);
+
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                     restart.setEnabled(true);
+                    }
+                }, 1000);
+
             }
         }.start();
 
