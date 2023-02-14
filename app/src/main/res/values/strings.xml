@@ -4,4 +4,7 @@
     <string name="Click_Counter"></string>
     <string name="time">0.0</string>
     <string name="InputString">s</string>
+    <string name="title_activity_rekordes">Rekordes</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

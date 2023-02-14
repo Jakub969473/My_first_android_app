@@ -107,9 +107,9 @@ public class MainActivity extends AppCompatActivity {
 
                 Timer();
 
-               
+                Intent z=new Intent(MainActivity.this, Rekords.class);
 
-
+                startActivity(z);
 
             }
         });
