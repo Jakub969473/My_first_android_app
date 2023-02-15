@@ -1,20 +1,18 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
-
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowInsets;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -22,7 +20,7 @@ import android.widget.ListView;
  */
 public class Rekords extends AppCompatActivity {
 
-
+    List records=new LinkedList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +28,19 @@ public class Rekords extends AppCompatActivity {
 
         setContentView(R.layout.activity_rekords);
 
-        ListView recordList=findViewById(R.id.record_list);
+        ListView recordList = findViewById(R.id.record_list);
 
-        String countryList[] = {"India", "China", "australia", "Portugle", "America", "NewZealand"};
+        TextView text = findViewById(R.id.Text);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_rekords,R.id.textView,countryList);
+        fileReader read=new fileReader(Rekords.this);
+
+        records=read.loadData();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_rekords,
+                R.id.Text, records);
 
         recordList.setAdapter(arrayAdapter);
     }
 
-}
+
+    }

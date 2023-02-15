@@ -11,25 +11,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView text;
-
     TextView timer;
-
     String userInput;
-
     Button button;
     int counter=0;
-
     int time;
-
     Button restart;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,17 @@ public class MainActivity extends AppCompatActivity {
         Button start=findViewById(R.id.StartButton);
 
         restart=findViewById(R.id.RestartButton);
+
+        Button records =findViewById(R.id.recordButton);
+
+        records.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent z=new Intent(MainActivity.this, Rekords.class);
+
+                startActivity(z);
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,11 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 start.setVisibility(View.INVISIBLE);
 
                 Timer();
-
-                Intent z=new Intent(MainActivity.this, Rekords.class);
-
-                startActivity(z);
-
             }
         });
 
@@ -165,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 1000);
 
+                newRecord();
             }
         }.start();
 
@@ -181,6 +189,51 @@ public class MainActivity extends AppCompatActivity {
     public void Restart()
     {
         this.recreate();
+    }
+
+
+    public void btnSaveData(List records) {
+        try {
+            FileOutputStream file = openFileOutput("Data.txt", MODE_PRIVATE);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(file);
+
+            Iterator it=records.iterator();
+
+            while(it.hasNext()){
+                outputStreamWriter.write( it.next()+ "\n");
+
+            }
+
+            outputStreamWriter.flush();
+            outputStreamWriter.close();
+            Toast.makeText(MainActivity.this, "Successfully saved", Toast.LENGTH_LONG)
+                    .show();
+
+        } catch (IOException e) {
+            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG)
+                    .show();
+        }
+    }
+
+    private void newRecord(){
+
+        fileReader read=new fileReader(MainActivity.this);
+
+        List records=read.loadData();
+
+        for(int i=0;i<records.size();i++){
+
+            int x=Integer.parseInt((String)records.get(i));
+
+            if(i+1>=records.size() || counter>x){
+                records.add(i,counter);
+                break;
+            }else if(counter==Integer.parseInt((String) records.get(i+1))){
+                break;
+            }
+        }
+
+        btnSaveData(records);
     }
 
 }
