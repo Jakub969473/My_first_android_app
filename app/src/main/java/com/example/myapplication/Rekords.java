@@ -1,18 +1,16 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -31,6 +29,17 @@ public class Rekords extends AppCompatActivity {
         ListView recordList = findViewById(R.id.record_list);
 
         TextView text = findViewById(R.id.Text);
+
+        Button returnButton =findViewById(R.id.ReturnButton);
+
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent z=new Intent(Rekords.this, MainActivity.class);
+
+                startActivity(z);
+            }
+        });
 
         fileReader read=new fileReader(Rekords.this);
 

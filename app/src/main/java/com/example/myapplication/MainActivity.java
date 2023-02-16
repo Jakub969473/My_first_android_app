@@ -206,8 +206,6 @@ public class MainActivity extends AppCompatActivity {
                 outputStreamWriter.write( counter+ "\n");
             }
 
-
-
             outputStreamWriter.flush();
             outputStreamWriter.close();
             Toast.makeText(MainActivity.this, "Successfully saved", Toast.LENGTH_LONG)
