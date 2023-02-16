@@ -197,12 +197,16 @@ public class MainActivity extends AppCompatActivity {
             FileOutputStream file = openFileOutput("Data.txt", MODE_PRIVATE);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(file);
 
-            Iterator it=records.iterator();
 
-            while(it.hasNext()){
-                outputStreamWriter.write( it.next()+ "\n");
-
+            if(records.size()>0){
+                for(int i=0;i<records.size();i++){
+                    outputStreamWriter.write( records.get(i)+ "\n");
+                }
+            }else{
+                outputStreamWriter.write( counter+ "\n");
             }
+
+
 
             outputStreamWriter.flush();
             outputStreamWriter.close();
@@ -225,10 +229,14 @@ public class MainActivity extends AppCompatActivity {
 
             int x=Integer.parseInt((String)records.get(i));
 
-            if(i+1>=records.size() || counter>x){
+            if( counter>x){
                 records.add(i,counter);
                 break;
+            }else if(i+1>=records.size() ){
+                records.add(i+1,counter);
+                break;
             }else if(counter==Integer.parseInt((String) records.get(i+1))){
+
                 break;
             }
         }
